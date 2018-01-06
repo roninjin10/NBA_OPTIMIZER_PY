@@ -1,10 +1,11 @@
 import pandas as pd
+import numpy as np 
 
 dk = 'DRAFT_KINGS'
 
 def roster_constr(site):
 	if site == dk:
-		return ([
+		return [
 			['PG'],
 			['SG'],
 			['SF'],
@@ -13,7 +14,7 @@ def roster_constr(site):
 			['PG','SG'],
 			['SF','PF'],
 			['PG','SG','SF','PF','C'],
-			])
+			]
 
 sal_cap_dk = 50000
 
@@ -23,14 +24,20 @@ def value(site,projection,salary):
 	return projection - (min_proj + value_mult * (salary - min_sal)/1000)
 
 def create_pool(site):
+	def isEligibleRosterSpot(roster_position, player_position, ):
+		print('roster position: ', roster_position, player_position)
+		return roster_position in str(player_position)
+
 	out = pd.read_csv('./projections.csv')[['Name','Projection','Salary','Position','Team']]
 	
 	out['Value'] = value(site,out['Projection'],out['Salary'])
 	for i, roster_spot in enumerate(roster_constr(site)):
+		out["isEligibleRosterSpot" + str(i)] = False
 		for roster_position in roster_spot:
-			out["isEligibleRosterSpot" + str(i)] = True if roster_position in out['Position'] else False
+			out["isEligibleRosterSpot" + str(i)] = np.logical_or(out['Position'].str.contains(roster_position) , out["isEligibleRosterSpot" + str(i)])
+	
 	out["isExcluded"] = False
-	out["isLocked"] = True
+	out["isLocked"] = False
 	out["isInLineup"] = False
 	
 	return out
