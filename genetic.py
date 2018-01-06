@@ -21,16 +21,15 @@ sal_cap_dk = 50000
 def value(site,projection,salary):
 	if site == dk:
 		min_proj, value_mult, min_sal = 18, 4.2, 3000
+
 	return projection - (min_proj + value_mult * (salary - min_sal)/1000)
 
 def create_pool(site):
-	def isEligibleRosterSpot(roster_position, player_position, ):
-		print('roster position: ', roster_position, player_position)
-		return roster_position in str(player_position)
 
 	out = pd.read_csv('./projections.csv')[['Name','Projection','Salary','Position','Team']]
 	
 	out['Value'] = value(site,out['Projection'],out['Salary'])
+
 	for i, roster_spot in enumerate(roster_constr(site)):
 		out["isEligibleRosterSpot" + str(i)] = False
 		for roster_position in roster_spot:
