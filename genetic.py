@@ -16,7 +16,9 @@ def roster_constr(site):
 			['PG','SG','SF','PF','C'],
 			]
 
-sal_cap_dk = 50000
+def salary_cap(site):
+	if site == dk:
+		return 50000
 
 def value(site,projection,salary):
 	if site == dk:
@@ -24,23 +26,40 @@ def value(site,projection,salary):
 
 	return projection - (min_proj + value_mult * (salary - min_sal)/1000)
 
-def create_pool(site):
+class Lineup:
 
-	out = pd.read_csv('./projections.csv')[['Name','Projection','Salary','Position','Team']]
-	
-	out['Value'] = value(site,out['Projection'],out['Salary'])
+	def __init__(self, pg = None, sg = None, sf = None, pf = None, c = None, g = None, f = None, flex = None):
+        self.roster = {}
+        self.roster['pg'] = pg
+        self.roster['sg'] = sg
+        self.roster['sf'] = sf
+        self.roster['pf'] = pf
+        self.roster['c'] = c
+        self.roster['g'] = g
+        self.roster['f'] = f
+        self.roster['flex'] = flex
+		
 
-	for i, roster_spot in enumerate(roster_constr(site)):
-		out["isEligibleRosterSpot" + str(i)] = False
-		for roster_position in roster_spot:
-			out["isEligibleRosterSpot" + str(i)] = np.logical_or(out['Position'].str.contains(roster_position) , out["isEligibleRosterSpot" + str(i)])
-	
-	out["isExcluded"] = False
-	out["isLocked"] = False
-	out["isInLineup"] = False
-	
-	return out
+class player_pool:
+	def create_pool(self, site):
+
+		out = pd.read_csv('./projections.csv')[['Name','Projection','Salary','Position','Team']]
+		
+		out['Value'] = value(site,out['Projection'],out['Salary'])
+
+		for i, roster_spot in enumerate(roster_constr(site)):
+			out["isEligibleRosterSpot" + str(i)] = False
+			for roster_position in roster_spot:
+				out["isEligibleRosterSpot" + str(i)] = np.logical_or(out['Position'].str.contains(roster_position) , out["isEligibleRosterSpot" + str(i)])
+		
+		out["isExcluded"] = False
+		out["isLocked"] = False
+		out["isInLineup"] = False
+		
+		return out
+
+	def dynamic_optimize(self, lineup)
 
 if __name__ == "__main__":
 	player_pool = create_pool(dk)
-	print(player_pool.head())
+	memoized = {}
