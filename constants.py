@@ -20,6 +20,7 @@ g = 'G'
 f = 'F'
 flex = 'FLEX'
 
+stat_categories = (pts, rbs, asts, stls, blks, tos, threes, dd, td)
 
 #DraftKings Constants
 

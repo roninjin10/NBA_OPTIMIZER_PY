@@ -10,7 +10,8 @@ class Player:
         self.site_id = info[site_id]
 
         self.projection = {}
-        self.projection[''
+        for category in stat_categories:
+            self.projection[category] = info[category] 
 
     def copy_player(self):
         #returns an identical player

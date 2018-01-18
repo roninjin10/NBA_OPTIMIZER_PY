@@ -17,4 +17,4 @@ class Site:
 
     #calculates fantasy points of Player object
     def fantasy_points(player):
-        return sum([player[category] * dk_scoring[category] for category in dk_scoring.keys()])
+        return sum([player.projection[category] * dk_scoring[category] for category in stat_categories])
