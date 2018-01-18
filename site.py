@@ -1,36 +1,18 @@
-dk = 'DRAFTKINGS'
-fd = 'FANDUEL'
+import constants
 
 class DraftKings:
 
 	#right now just dkl
 	def __init_(self)
 		self.name = name
-		self.roster_construction = {
-			'PG': ('PG'),
-			'SG': ('SG'),
-			'SF': ('SF'),
-			'PF': ('PF'),
-			'C': ('C'),
-			'G': ('PG','SG'),
-			'F': ('SF','PF'),
-			'Flex': ('PG','SG','SF','PF','C'),
-			}
-		self.salary_cap = 50000
-		self.min_proj = 18
-		self.value_mult = 4.2
-		self.min_sal = 3000
+		self.roster_construction = dk_roster_constr
+		self.sal_cap = dk_sal_cap
+		self.minimum_proj = dk_minimum_proj
+		self.value_mult = dk_val_mult
+		self.min_sal = dk_min_sal
 
 	def value(self,projection,salary):
-		return projection - (min_proj + value_mult * (salary - min_sal)/1000)
+		return projection - (self.min_proj + self.value_mult * (salary - self.min_sal)/1000)
 
 	def empty_roster():
-		return {'PG': None,
-				'SG': None,
-				'SF': None,
-				'PF': None,
-				'C': None,
-				'G': None,
-				'F': None,
-				'Flex': None,
-				}
+		return dk_empty_roster
