@@ -1,6 +1,10 @@
 pseudo code for a genetic algorithm
 
-credit to https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_quick_guide.htm
+credit to this great walkthrough for Genetic Algorithms https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_quick_guide.htm
+credit to this great lecuture from Patrick Winston on Genetic Algorithms https://www.youtube.com/watch?v=kHyNqSnzP8Y
+credit to https://github.com/DimaKudosh/pydfs-lineup-optimizer/
+credit to this repository https://github.com/DimaKudosh/pydfs-lineup-optimizer/blob/master/pydfs_lineup_optimizer/lineup_optimizer.py
+
 
 Function GA
 
@@ -63,4 +67,10 @@ Method-
 - Test that the playerpool is valid
 
 - lock in the locks/remove locks from playerpool
+
+-begin a while loop to produce multiple players
+
+-update current exposures
+
+-use current exposures to update player pool
 
