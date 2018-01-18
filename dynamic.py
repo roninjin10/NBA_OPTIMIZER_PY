@@ -1,47 +1,58 @@
 import pandas as pd
 import numpy as np 
 
+
+#constants
 dk = 'DRAFT_KINGS'
 
-def roster_constr(site):
-	if site == dk:
-		return [
-			['PG'],
-			['SG'],
-			['SF'],
-			['PF'],
-			['C'],
-			['PG','SG'],
-			['SF','PF'],
-			['PG','SG','SF','PF','C'],
-			]
+class Site:
 
-def salary_cap(site):
-	if site == dk:
-		return 50000
+	def __init_(self, name = dk)
+		self.name = name
 
-def value(site,projection,salary):
-	if site == dk:
-		min_proj, value_mult, min_sal = 18, 4.2, 3000
+	def roster_constr(self):
+		if self.name == dk:
+			return [
+				['PG'],
+				['SG'],
+				['SF'],
+				['PF'],
+				['C'],
+				['PG','SG'],
+				['SF','PF'],
+				['PG','SG','SF','PF','C'],
+				]
 
-	return projection - (min_proj + value_mult * (salary - min_sal)/1000)
+	def salary_cap(self):
+		if self.name == dk:
+			return 50000
+
+	def value(self,projection,salary):
+		if name == dk:
+			min_proj, value_mult, min_sal = 18, 4.2, 3000
+
+		return projection - (min_proj + value_mult * (salary - min_sal)/1000)
 
 class Lineup:
 
 	def __init__(self, pg = None, sg = None, sf = None, pf = None, c = None, g = None, f = None, flex = None):
-        self.roster = {}
-        self.roster['pg'] = pg
-        self.roster['sg'] = sg
-        self.roster['sf'] = sf
-        self.roster['pf'] = pf
-        self.roster['c'] = c
-        self.roster['g'] = g
-        self.roster['f'] = f
-        self.roster['flex'] = flex
+		self.roster = {}
+		self.roster['pg'] = pg
+		self.roster['sg'] = sg
+		self.roster['sf'] = sf
+		self.roster['pf'] = pf
+		self.roster['c'] = c
+		self.roster['g'] = g
+		self.roster['f'] = f
+		self.roster['flex'] = flex
 		
 
-class player_pool:
-	def create_pool(self, site):
+class Pool:
+	def __init__(self):
+        __pool = pd.DataFrame({})
+		__orig_pool = pd.DataFrame({})
+
+	def from_csv(self, site):
 
 		out = pd.read_csv('./projections.csv')[['Name','Projection','Salary','Position','Team']]
 		
@@ -58,8 +69,10 @@ class player_pool:
 		
 		return out
 
-	def dynamic_optimize(self, lineup)
+	def dynamic_optimize(self, lineup):
+		pass
 
 if __name__ == "__main__":
-	player_pool = create_pool(dk)
+	player_pool = Pool()
+
 	memoized = {}
