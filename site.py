@@ -1,7 +1,7 @@
 
 class Site:
 
-    def __init_(self)
+    def __init_(self, site=dk):
         self.name = name
         self.roster_construction = dk_roster_constr
         self.sal_cap = dk_sal_cap
