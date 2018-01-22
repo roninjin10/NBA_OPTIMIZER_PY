@@ -1,3 +1,5 @@
+
+
 class Lineup:
 
     def __init__(self):
@@ -15,7 +17,7 @@ class Lineup:
     def points(self):
         return sum(self.site.fantasy_points(plr) for plr in self.roster.items() if not plr is None)
 
-    def create_key(self, current_position, current_player_num):
+    def key(self, current_position, current_player_num):
         return "Pos: " + current_position + " PlNum: " + current_player_num + " Sal: " + str(self.salary()) + " Positions: " + ''.join(str(pos != None) for pos in self.roster.items())
 
 
