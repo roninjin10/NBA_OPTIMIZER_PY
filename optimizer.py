@@ -36,7 +36,7 @@ class Optimizer:
 
 	def dynamic_optimizer(self, n):
 		self.memoized = {}
-		return __dynamic_optimizer(empty_roster(self.site), 0, 0)
+		self.lineups.append( __dynamic_optimizer(empty_roster(self.site), 0, 0))
 
 	def genetic_optimizer(self, n):
 		pass

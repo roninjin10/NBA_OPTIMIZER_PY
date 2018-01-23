@@ -35,6 +35,7 @@ dk_roster_constr = {
             Flex: ('PG','SG','SF','PF','C'),
             }
 
+
 dk_empty_roster = {
             PG: None,
             SG: None,
@@ -62,3 +63,7 @@ dk_sal_cap = 50000
 dk_minimum_proj = 18
 dk_val_mult = 4.2
 dk_min_sal = 3000
+
+def empty_roster(site):
+    if site == dk:
+        return dk_empty_roster
