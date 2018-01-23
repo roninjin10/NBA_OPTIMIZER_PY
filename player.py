@@ -1,32 +1,28 @@
+import constants
+
 class Player:
 
-    def __init__(self, info = {}):
-        self.name = info[name]
-        self.team = info[team]
-        self.opp = info[opp]
-        self.position = info[position]
-        self.salary = info[salary]
-        self.real_value = info[real_value]
-        self.site_id = info[site_id]
+    def __init__(self, name, team, opp, position, salary, site_id, projection, site=dk):
+        self.name = name
+        self.team = team
+        self.opp = opp
+        self.position = position
+        self.salary = salary
+        self.__site_id = site_id
+        self.projection = projection 
+        self.site = Site(site)
+        
+        self.__test_player()
 
-        self.projection = {}
-        for category in stat_categories:
-            self.projection[category] = info[category] 
+    def __test_player(self):
+        """test to make sure it is a valid player"""
+        pass
 
-    def copy_player(self):
-        #returns an identical player
-        new_player = Player
-        new_player.player_info = self.player_info
-        return new_player
+    def projection(self):
+        return self.site.fantasy_points(self.projection)
 
-    def change_player_info(self, info_dic):
-        #info_dic is a dictionary containing some player_info
-        for info in info_dic.keys:
-            self.player_info[info] = info_dic[info]
+    def site_id(self):
+        return __site_id[self.site.site]
 
-    def get_info(self, info_to_get):
-        return self.player_info[info_to_get]
-
-    def set_info(self, info_to_set, info_value):
-		self.player_info[info_to_set] = info_value
-
+    def value(self):
+        return self.site.value(self.projection)
