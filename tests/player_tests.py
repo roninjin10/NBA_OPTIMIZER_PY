@@ -1,21 +1,20 @@
 import unittest
-import dynamic
+from  .. import player 
 
-class TestDynamic(unittest.TestCase):
+class TestPlayer(unittest.TestCase):
 
-    def test_init(self):
-        test_player = Player(name='name', team='team', opp='opp', pos='pos', salary=1000, real_value =1000, site_id ='152334')
-        self.assertEquals(test_player.name, 'name')
-        self.assertEquals(test_player.team, 'team')
-        self.assertEquals(test_player.opp, 'opp')
-        self.assertEquals(test_player.pos, 'pos')
-        self.assertEquals(test_player.salary, 1000)
-        self.assertEquals(test_player.real_value, 1000)
-        self.assertEquals(test_player.site_id , '152334')
+    def setUp(self):
+        self.test_player = Player(name='name', team='team', opp='opp', position='pos', salary=3000, site_id ={dk: '152334'}, projection={'pts' : 10, 'rbs': 1, 'asts': 1, 'stls': 1, 'blks': 1, 'tos': 1, 'threes': 1}, site=dk)
+        
 
-    
-	        	
+    def test_player(self):
+        pass
 
+    def test_projection(self):
+        self.assertEqual(self.test_player.projection(), 16.75)
+
+    def test_value(self):
+        self.assertEqual(self.test_player.value(), -1.25)
 
 if __name__ == '__main__':
     unittest.main()
