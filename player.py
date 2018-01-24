@@ -13,14 +13,11 @@ class Player:
         self.stat_projections = stat_projections
         self.dfs_site = DFS_Site(dfs_site)
         
-        self.__test_player()
-
-    def __test_player(self):
-        """test to make sure it is a valid player"""
-        pass
-
     def dfs_projection(self):
         return self.dfs_site.fantasy_points(self.stat_projections)
+    
+    def site_value(self):
+        return self.dfs_site.site_value(self.stat_projections, self.salary)
 
     def dfs_site_id(self):
         return __site_id[self.dfs_site.dfs_site]

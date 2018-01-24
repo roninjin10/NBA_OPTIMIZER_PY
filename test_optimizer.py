@@ -16,7 +16,7 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(self.test_player.dfs_projection(), 16.75)
 
     def test_value(self):
-        self.assertEqual(self.test_player.value(), -1.25)
+        self.assertEqual(self.test_player.site_value(), -1.25)
 
 if __name__ == '__main__':
     unittest.main()

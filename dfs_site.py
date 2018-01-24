@@ -7,12 +7,12 @@ class DFS_Site:
         self.dfs_site = dfs_site 
         self.roster_construction = constants.dk_roster_constr
         self.sal_cap = constants.dk_sal_cap
-        self.minimum_proj = constants.dk_minimum_proj
+        self.min_proj = constants.dk_min_proj
         self.value_mult = constants.dk_val_mult
         self.min_sal = constants.dk_min_sal
 
     def site_value(self,projection,salary):
-        return fantasy_points(projection) - (self.min_proj + self.value_mult * (salary - self.min_sal)/1000)
+        return self.fantasy_points(projection) - (self.min_proj + self.value_mult * (salary - self.min_sal)/1000)
 
     def empty_roster(self):
         return constants.dk_empty_roster
