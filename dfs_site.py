@@ -11,7 +11,7 @@ class DFS_Site:
         self.value_mult = constants.dk_val_mult
         self.min_sal = constants.dk_min_sal
 
-    def site_value(self,projection,salary):
+    def dfs_value(self,projection,salary):
         return self.fantasy_points(projection) - (self.min_proj + self.value_mult * (salary - self.min_sal)/1000)
 
     def empty_roster(self):

@@ -16,8 +16,8 @@ class Player:
     def dfs_projection(self):
         return self.dfs_site.fantasy_points(self.stat_projections)
     
-    def site_value(self):
-        return self.dfs_site.site_value(self.stat_projections, self.salary)
+    def dfs_value(self):
+        return self.dfs_site.dfs_value(self.stat_projections, self.salary)
 
     def dfs_site_id(self):
         return __site_id[self.dfs_site.dfs_site]
