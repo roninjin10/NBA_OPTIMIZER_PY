@@ -1,8 +1,9 @@
 import constants
+from site import Site 
 
 class Player:
 
-    def __init__(self, name, team, opp, position, salary, site_id, projection, site=dk):
+    def __init__(self, name, team, opp, position, salary, site_id, projection, site= constants.dk):
         self.name = name
         self.team = team
         self.opp = opp

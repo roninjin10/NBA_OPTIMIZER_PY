@@ -1,5 +1,5 @@
-import unittest
-from  .. import player 
+from constants import *
+from player import Player
 
 class TestPlayer(unittest.TestCase):
 
@@ -18,4 +18,3 @@ class TestPlayer(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    
