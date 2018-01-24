@@ -1,4 +1,4 @@
-from constants import *
+import constants
 from player import Player
 import unittest
 
@@ -6,7 +6,7 @@ import unittest
 class TestPlayer(unittest.TestCase):
 
     def setUp(self):
-        self.test_player = Player(name='name', team='team', opp='opp', position='pos', salary=3000, dfs_site_id ={dk: '152334'}, projection={'pts' : 10, 'rbs': 1, 'asts': 1, 'stls': 1, 'blks': 1, 'tos': 1, 'threes': 1}, dfs_site=dk)
+        self.test_player = Player(name='name', team='team', opp='opp', position='pos', salary=3000, dfs_site_id ={constants.dk: '152334'}, stat_projections={constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}, dfs_site=constants.dk)
         
 
     def test_player(self):

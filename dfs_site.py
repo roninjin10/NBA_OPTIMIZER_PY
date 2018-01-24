@@ -14,11 +14,11 @@ class DFS_Site:
     def site_value(self,projection,salary):
         return fantasy_points(projection) - (self.min_proj + self.value_mult * (salary - self.min_sal)/1000)
 
-    def empty_roster():
+    def empty_roster(self):
         return constants.dk_empty_roster
 
-    def fantasy_points(projection):
-        return sum([projection[category] * dk_scoring[category] for category in constants.stat_categories])
+    def fantasy_points(self, projection):
+        return sum([projection[category] * constants.dk_scoring[category] for category in constants.stat_categories])
 
 
 if __name__ == "__main__":
