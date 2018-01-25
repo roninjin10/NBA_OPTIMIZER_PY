@@ -2,14 +2,27 @@ import constants
 from player import Player
 from dfs_site import DFS_Site
 import unittest
+from lineup import Lineup
+
 
 test_stat_projections = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
 
-test_player = Player(name='name', team='team', opp='opp', position='pos', salary=3000, dfs_site_id ={constants.dk: '152334'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
- 
+test_player = Player(name='name', team='team', opp='opp', position='pos', salary=3000, dfs_site_id ={constants.dk: '152333'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
 
+pg1 = Player(name='Chris Paul', team='HOU', opp='NY', position='PG', salary=9000, dfs_site_id ={constants.dk: '152334'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+pg2 = Player(name='George Hill', team='SAC', opp='PHO', position='PG/SG', salary=5000, dfs_site_id ={constants.dk: '152335'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+sg1 = Player(name='Devin Booker', team='PHO', opp='SAC', position='SG', salary=8000, dfs_site_id ={constants.dk: '152336'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+sg2 = Player(name='Danny Green', team='SA', opp='CLE', position='SG/SF', salary=4000, dfs_site_id ={constants.dk: '152337'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+sf1 = Player(name='Trevor Ariza', team='HOU', opp='NY', position='SF', salary=5000, dfs_site_id ={constants.dk: '152338'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+sf2 = Player(name='Jeff Green', team='CLE', opp='SA', position='SF/PF', salary=3800, dfs_site_id ={constants.dk: '152339'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+pf1 = Player(name='Kevin Love', team='CLE', opp='SA', position='PF/C', salary=7500, dfs_site_id ={constants.dk: '152340'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+pf2 = Player(name='Kristaps Porzingis', team='NY', opp='HOU', position='PF', salary=8800, dfs_site_id ={constants.dk: '152341'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+c1 = Player(name='Alex Len', team='PHO', opp='SAC', position='C', salary=4100, dfs_site_id ={constants.dk: '152342'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
+c2 = Player(name='Pau Gasol', team='SA', opp='CLE', position='C', salary=5400, dfs_site_id ={constants.dk: '152343'}, stat_projections=test_stat_projections, dfs_site=constants.dk)
 
-class TestPlayer(unittest.TestCase):
+test_players = [pg1, pg2, sg1, sg2, sf1, sf2, pf1, pf2, c1, c2]
+
+class Test_Player(unittest.TestCase):
 
     def setUp(self):
         self.test_player = test_player       
@@ -24,7 +37,16 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(self.test_player.dfs_value(), -1.25)
 
 
-class TestDFS_Site(unittest.TestCase):
+class Test_Lineup(unittest.TestCase):
+
+    def setUp(self):
+        self.empty_lineup = Lineup()
+        
+    def test_salary(self):
+        pass        
+
+
+class Test_DFS_Site(unittest.TestCase):
 
     def setUp(self):
         self.test_dfs_site = DFS_Site(constants.dk)

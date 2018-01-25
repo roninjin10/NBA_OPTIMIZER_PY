@@ -1,10 +1,10 @@
-
+from dfs_site import DFS_Site
 
 class Lineup:
 
     def __init__(self):
 
-        self.site = Site()
+        self.site = DFS_Site()
         self.roster = self.site.empty_roster
 
     #need to update the roster if site changes
@@ -23,7 +23,7 @@ class Lineup:
 
     def merge_lineup(self, lineup):
         for pos in self.roster.keys():
-        	if self[pos] = None:
+        	if self[pos] == None:
         		self[pos] = lineup[pos]
 
     def erase_lineup(self):
@@ -68,4 +68,4 @@ class Lineup:
         #returns a copy of the same lineup
         out = Lineup()
         out.roster = self.roster
-		return out
+        return out
