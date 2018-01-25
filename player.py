@@ -17,6 +17,19 @@ class Player:
         
         self.dfs_projection = dfs_site.fantasy_points(self.stat_projections)
         self.dfs_value = dfs_site.dfs_value(self.stat_projections, self.salary)        
+
+    def __repr__(self):
+        dic = {
+            'Name': self.name,
+            'Salary': self.salary,
+            f'{self.site_name}_Projection': self.dfs_projection,
+            f'{self.site_name}_Value': self.dfs_value,
+            'Team': self.team,
+            'Opp': self.opp,
+            'Position': self.position,
+            f'{self.site_name}_ID': self.dfs_site_id,
+            }
+        return dic.__repr__()
  
     def change_site(self, position, salary, dfs_site_id, site_name):
         self.position = position
