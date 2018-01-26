@@ -1,3 +1,28 @@
+TO DO:
+
+1. build tests for lineup.py
+
+2. finish lineup.py
+
+3. build tests for pool.py
+
+4. finish pool.py
+
+5. build and test basic optimizer.py
+
+6. build and test rust version of basic optimizer
+
+7. build and test python genetic optimizer
+
+8. port genetic optimizer to rust
+
+9. benchmark everything
+
+10. profit
+
+
+
+
 pseudo code for a genetic algorithm
 
 credit to this great walkthrough for Genetic Algorithms https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_quick_guide.htm
