@@ -162,7 +162,49 @@ class Test_Lineup(unittest.TestCase):
         self.assertEqual(self.lineup.roster[constants.g] , pg2)
         self.assertEqual(self.lineup.roster[constants.f] , sf2)
         self.assertEqual(self.lineup.roster[constants.flex] , c1)
-   
+
+    def test_add_player(self):
+        self.assertEqual(self.lineup.add_player(pg1),0)
+        self.assertEqual(self.lineup.roster[constants.pg], pg1)
+        
+        self.assertEqual(self.lineup.add_player(pg2),0)
+        self.assertEqual(self.lineup.roster[constants.sg], pg2)
+        
+        self.assertEqual(self.lineup.add_player(sg2),0)
+        self.assertEqual(self.lineup.roster[constants.g], sg2)
+        
+        self.assertEqual(self.lineup.add_player(sg1),0)
+        self.assertEqual(self.lineup.roster[constants.flex], sg1)
+        
+        self.assertEqual(self.lineup.add_player(sf1),0)
+        self.assertEqual(self.lineup.roster[constants.sf], sf1)
+        
+        self.assertEqual(self.lineup.add_player(sf2),0)
+        self.assertEqual(self.lineup.roster[constants.pf], sf2)
+        
+        self.assertEqual(self.lineup.add_player(pf1),0)
+        self.assertEqual(self.lineup.roster[constants.f], pf1)
+
+        self.assertEqual(self.lineup.add_player(pf2), 1)
+        self.assertEqual(pf2 in self.lineup.roster.items(), False)
+
+        self.assertEqual(self.lineup.add_player(c1),0)
+        self.assertEqual(self.lineup.roster[constants.c], c1)
+
+        self.assertEqual(self.lineup.add_player(pg1),1)
+        self.assertEqual(self.lineup.add_player(c2),1)
+
+        expensive_sf = copy.deepcopy(sf1)
+        expensive_sf.salary = 42000
+
+        test_salary_cap_lineup = Lineup()
+        self.assertEqual(self.lineup.add_player(expensive_SF), 0)
+        self.assertEqual(self.lineup.roster[constants.sf], expensive_SF)
+        
+        self.assertEqual(self.lineup.add_player(pg1), 2)
+        self.assertEqual(self.lineup.add_player(sg1), 0)
+
+
 class Test_DFS_Site(unittest.TestCase):
     """tests dk"""
 

@@ -7,10 +7,11 @@ def is_shared_element(collection1, collection2):
     return len(set1.union(set2)) < len(set1) + len(set2)
 
 class Lineup:
+    """lineup class only supports dk atm"""
 
     def __init__(self, site_name = constants.dk):
 
-        self.site = DFS_Site()
+        self.dfs_site = DFS_Site()
         self.roster = self.site.empty_roster
     
     def __repr__(self):
@@ -39,9 +40,8 @@ class Lineup:
 
 
     def erase_lineup(self):
-        for pos in self.roster.keys():
-        	self[pos] = None
-
+        self.roster = self.dfs_site.empty_roster
+        
     def add_player(self, new_player):
         """adds a player to the correct roster spot.
         returns 0 if the add was sucessful
