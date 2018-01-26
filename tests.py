@@ -98,10 +98,71 @@ class Test_Lineup(unittest.TestCase):
         self.lineup.roster[constants.sg] = sg1
         self.assertEqual(self.lineup.dfs_projection, 76.5)
 
-    def test_key(self):
-        pass
+    def test_dic_key(self):
+        """could use more tests but I'm confident this will work if the other methods work"""
+        self.lineup.roster[constants.pg] = pg1
+        key1 = self.lineup.dic_key()
+        self.lineup.roster[constants.sg] = sg1
+        key2 = self.lineup.dic_key()
+
+        self.assertEqual(key1 == key2, False)
   
+    def test_merge_lineup(self):
+        lineup_to_merge = Lineup()
+        self.lineup.roster[constants.pg] = pg1
+        self.lineup.roster[constants.sg] = sg1
+        self.lineup.roster[constants.sf] = sf1
+        self.lineup.roster[constants.pf] = pf1
+        self.lineup.roster[constants.c] = c1
+        self.lineup.roster[constants.g] = pg2
+        self.lineup.roster[constants.f] = sf2
+        self.lineup.roster[constants.flex] = c2
+
+        self.lineup.merge_lineups(lineup_to_merge)
+        
+        self.assertEqual(self.lineup.roster[constants.pg],pg1)
+        self.assertEqual(self.lineup.roster[constants.sg] , sg1)
+        self.assertEqual(self.lineup.roster[constants.sf] , sf1)
+        self.assertEqual(self.lineup.roster[constants.pf] , pf1)
+        self.assertEqual(self.lineup.roster[constants.c] , c1)
+        self.assertEqual(self.lineup.roster[constants.g] , pg2)
+        self.assertEqual(self.lineup.roster[constants.f] , sf2)
+        self.assertEqual(self.lineup.roster[constants.flex] , c2)
+
+        lineup_to_merge.roster[constants.pg] = pg2
+        lineup_to_merge.roster[constants.sg] = sg2
+        lineup_to_merge.roster[constants.sf] = sf2
+        lineup_to_merge.roster[constants.pf] = pf2
+        lineup_to_merge.roster[constants.c] = c2
+        lineup_to_merge.roster[constants.g] = pg1
+        lineup_to_merge.roster[constants.f] = sf1
+        lineup_to_merge.roster[constants.flex] = c1
+
+        self.lineup.merge_lineups(lineup_to_merge)
+        
+        self.assertEqual(self.lineup.roster[constants.pg],pg1)
+        self.assertEqual(self.lineup.roster[constants.sg] , sg1)
+        self.assertEqual(self.lineup.roster[constants.sf] , sf1)
+        self.assertEqual(self.lineup.roster[constants.pf] , pf1)
+        self.assertEqual(self.lineup.roster[constants.c] , c1)
+        self.assertEqual(self.lineup.roster[constants.g] , pg2)
+        self.assertEqual(self.lineup.roster[constants.f] , sf2)
+        self.assertEqual(self.lineup.roster[constants.flex] , c2)
  
+        self.lineup.roster[constants.flex] = None
+        self.lineup.roster[constants.c] = None
+
+        self.lineup.merge_lineups(lineup_to_merge)
+
+        self.assertEqual(self.lineup.roster[constants.pg],pg1)
+        self.assertEqual(self.lineup.roster[constants.sg] , sg1)
+        self.assertEqual(self.lineup.roster[constants.sf] , sf1)
+        self.assertEqual(self.lineup.roster[constants.pf] , pf1)
+        self.assertEqual(self.lineup.roster[constants.c] , c2)
+        self.assertEqual(self.lineup.roster[constants.g] , pg2)
+        self.assertEqual(self.lineup.roster[constants.f] , sf2)
+        self.assertEqual(self.lineup.roster[constants.flex] , c1)
+   
 class Test_DFS_Site(unittest.TestCase):
     """tests dk"""
 

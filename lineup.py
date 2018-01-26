@@ -28,8 +28,8 @@ class Lineup:
         return sum(plr.dfs_projection for plr in self.roster.items() if not plr is None)
 
     def key(self, current_position, current_player_num):
-        return "Pos: " + current_position + " PlNum: " + current_player_num + " Sal: " + str(self.salary()) + "
-        Positions: " + ''.join(pos + str(pos != None) for pos in constants.dk_roster_order)
+        return ("Pos: " + current_position + " PlNum: " + current_player_num + " Sal: " + str(self.salary()) + " Positions: " 
+            + ''.join(pos + str(pos != None) for pos in constants.dk_roster_order))
 
 
     def merge_lineup(self, lineup):
