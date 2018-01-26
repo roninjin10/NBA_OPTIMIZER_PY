@@ -4,7 +4,7 @@ import constants
 def is_shared_element(collection1, collection2):
     """returns true if any elements in 2 collections match.  Used enough where I should make this importable"""
     set1, set2 = set(collection1), set(collection2)
-    return len(set1.union(set2)) < len(set1) + len(set2))
+    return len(set1.union(set2)) < len(set1) + len(set2)
 
 class Lineup:
 
