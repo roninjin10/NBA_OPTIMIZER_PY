@@ -25,7 +25,7 @@ stat_categories = (pts, rbs, asts, stls, blks, tos, threes, dd, td)
 
 #DraftKings Constants
 
-dk_roster_constr = {
+dk_roster_constr = 
             pg: ('PG'),
             sg: ('SG'),
             sf: ('SF'),

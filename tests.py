@@ -69,9 +69,10 @@ class Test_Lineup(unittest.TestCase):
         self.empty_lineup = Lineup()
         
     def test_salary(self):
-        pass        
+        pass
 
-
+  
+ 
 class Test_DFS_Site(unittest.TestCase):
     """tests dk"""
 

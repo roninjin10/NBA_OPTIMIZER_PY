@@ -6,7 +6,7 @@ class DFS_Site:
     def __init__(self, dfs_site=constants.dk):
         self.dfs_site = dfs_site 
         self.roster_construction = constants.dk_roster_constr
-        self.sal_cap = constants.dk_sal_cap
+        self.salary_cap = constants.dk_sal_cap
         self.min_proj = constants.dk_min_proj
         self.value_mult = constants.dk_val_mult
         self.min_sal = constants.dk_min_sal
