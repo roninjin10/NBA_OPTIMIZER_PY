@@ -53,7 +53,7 @@ class Lineup:
         #elif (player causes lineup to not satisfy the sites roster construction):
         #   return 3
         else:
-            for roster_spot in constants.dk_roster_order:
+            for roster_spot in constants.dk_roster_priority[new_player.position]:
                 if self.roster[roster_spot] == None and is_shared_element(new_player.dk_position(), dk_roster_construction[roster_spot]):
                     self.roster[roster_spot] = new_player
                     return 0
