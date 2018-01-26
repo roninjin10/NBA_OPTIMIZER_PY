@@ -12,6 +12,14 @@ class Lineup:
 
         self.site = DFS_Site()
         self.roster = self.site.empty_roster
+    
+    def __repr__(self):
+        projection = self.dfs_projection()
+        salary = self.salary()
+        return self.roster.__repr__ + '/n' + f'Salary: {salary} DFS_Projection: {projection}'
+
+    def __len__(self):
+        return len(plr for plr in self.roster.items() if not plr is None)        
 
     def salary(self):
         return sum(plr.salary for plr in self.roster.items() if not plr is None)

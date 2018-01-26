@@ -12,12 +12,6 @@ class Optimizer:
 			pool = Pool()
 
 	def __dynamic_optimizer(self, cur_lineup, cur_position, cur_player):
-		if not cur_lineup.is_valid_salary:
-			return None
-
-		if cur_player > self.pool.position_len(cur_position):
-			return None
-
 		if cur_lineup.is_valid_lineup:
 			return cur_lineup
 
