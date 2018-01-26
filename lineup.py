@@ -52,7 +52,7 @@ class Lineup:
         #   return 3
         else:
             for roster_spot in [constants.pg, constants.sg, constants.sf, constants.pf, constants.c, constants.g, constants.f, constants.f]:
-                if self.roster[roster_spot] != None and is_shared_element(new_player.dk_position(), dk_roster_construction[roster_spot]):
+                if self.roster[roster_spot] == None and is_shared_element(new_player.dk_position(), dk_roster_construction[roster_spot]):
                     self.roster[roster_spot] = new_player
                     return 0
         return 1
