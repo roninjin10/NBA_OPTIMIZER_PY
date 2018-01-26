@@ -9,16 +9,28 @@ test_stat_projections = {constants.pts : 10, constants.rbs: 1, constants.asts: 1
 
 test_player = Player(name='Kyle Anderson', team='SA', opp='CLE', position='PG/SF', salary=3000, dfs_site_id ='152333', stat_projections=test_stat_projections, site_name=constants.dk)
 
-pg1 = Player(name='Chris Paul', team='HOU', opp='NY', position='PG', salary=9000, dfs_site_id ='152334', stat_projections=test_stat_projections, site_name=constants.dk)
-pg2 = Player(name='George Hill', team='SAC', opp='PHO', position='PG/SG', salary=5000, dfs_site_id ='152335', stat_projections=test_stat_projections, site_name=constants.dk)
-sg1 = Player(name='Devin Booker', team='PHO', opp='SAC', position='SG', salary=8000, dfs_site_id ='152336', stat_projections=test_stat_projections, site_name=constants.dk)
-sg2 = Player(name='Danny Green', team='SA', opp='CLE', position='SG/SF', salary=4000, dfs_site_id ='152337', stat_projections=test_stat_projections, site_name=constants.dk)
-sf1 = Player(name='Trevor Ariza', team='HOU', opp='NY', position='SF', salary=5000, dfs_site_id ='152338', stat_projections=test_stat_projections, site_name=constants.dk)
-sf2 = Player(name='Jeff Green', team='CLE', opp='SA', position='SF/PF', salary=3800, dfs_site_id ='152339', stat_projections=test_stat_projections, site_name=constants.dk)
-pf1 = Player(name='Kevin Love', team='CLE', opp='SA', position='PF/C', salary=7500, dfs_site_id ='152340', stat_projections=test_stat_projections, site_name=constants.dk)
-pf2 = Player(name='Kristaps Porzingis', team='NY', opp='HOU', position='PF', salary=8800, dfs_site_id ='152341', stat_projections=test_stat_projections, site_name=constants.dk)
-c1 = Player(name='Alex Len', team='PHO', opp='SAC', position='C', salary=4100, dfs_site_id ='152342', stat_projections=test_stat_projections, site_name=constants.dk)
-c2 = Player(name='Pau Gasol', team='SA', opp='CLE', position='C', salary=5400, dfs_site_id ='152343', stat_projections=test_stat_projections, site_name=constants.dk)
+pg1_stats = {constants.pts : 20, constants.rbs: 3, constants.asts: 9, constants.stls: 2, constants.blks: .2, constants.tos: 1.8, constants.threes: 2, constants.dd: .3, constants.td: .2} #42.8 dkpoints 
+pg2_stats = {constants.pts : 13, constants.rbs: 2, constants.asts: 4.5, constants.stls: .8, constants.blks: .2, constants.tos: 1.5, constants.threes: 1, constants.dd: 0, constants.td: 0}  
+sg1_stats = {constants.pts : 27, constants.rbs: 1.4, constants.asts: 2.5, constants.stls: .2, constants.blks: .1, constants.tos: 2, constants.threes: 3.2, constants.dd: 0, constants.td: 0}  #33.7 dkpoints
+sg2_stats = {constants.pts : 9, constants.rbs: 2.5, constants.asts: 1.5, constants.stls: 1.2, constants.blks: 1.1, constants.tos: 1, constants.threes: 1.3, constants.dd: 0, constants.td: 0}  
+sf1_stats = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
+sf2_stats = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
+pf1_stats = {constants.pts : 20, constants.rbs: 10, constants.asts: 1, constants.stls: 1, constants.blks: 2.5, constants.tos: 1, constants.threes: 2, constants.dd: .8, constants.td: 0}  
+pf2_stats = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
+c1_stats = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
+c2_stats = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
+
+
+pg1 = Player(name='Chris Paul', team='HOU', opp='NY', position='PG', salary=9000, dfs_site_id ='152334', stat_projections=pg1_stats, site_name=constants.dk)
+pg2 = Player(name='George Hill', team='SAC', opp='PHO', position='PG/SG', salary=5000, dfs_site_id ='152335', stat_projections=pg2_stats, site_name=constants.dk)
+sg1 = Player(name='Devin Booker', team='PHO', opp='SAC', position='SG', salary=8000, dfs_site_id ='152336', stat_projections=sg1_stats, site_name=constants.dk)
+sg2 = Player(name='Danny Green', team='SA', opp='CLE', position='SG/SF', salary=4000, dfs_site_id ='152337', stat_projections=sg2_stats, site_name=constants.dk)
+sf1 = Player(name='Trevor Ariza', team='HOU', opp='NY', position='SF', salary=5000, dfs_site_id ='152338', stat_projections=sf1_stats, site_name=constants.dk)
+sf2 = Player(name='Jeff Green', team='CLE', opp='SA', position='SF/PF', salary=3800, dfs_site_id ='152339', stat_projections=sf2_stats, site_name=constants.dk)
+pf1 = Player(name='Kevin Love', team='CLE', opp='SA', position='PF/C', salary=7500, dfs_site_id ='152340', stat_projections=pf1_stats, site_name=constants.dk)
+pf2 = Player(name='Kristaps Porzingis', team='NY', opp='HOU', position='PF', salary=8800, dfs_site_id ='152341', stat_projections=pf2_stats, site_name=constants.dk)
+c1 = Player(name='Alex Len', team='PHO', opp='SAC', position='C', salary=4100, dfs_site_id ='152342', stat_projections=c1_stats, site_name=constants.dk)
+c2 = Player(name='Pau Gasol', team='SA', opp='CLE', position='C', salary=5400, dfs_site_id ='152343', stat_projections=c2_stats, site_name=constants.dk)
 
 test_players = [test_player, pg1, pg2, sg1, sg2, sf1, sf2, pf1, pf2, c1, c2]
 
@@ -66,11 +78,28 @@ class Test_Player(unittest.TestCase):
 class Test_Lineup(unittest.TestCase):
 
     def setUp(self):
-        self.empty_lineup = Lineup()
+        self.lineup = Lineup()
         
     def test_salary(self):
-        pass
+        self.assertEqual(self.lineup.salary, 0)
 
+        self.lineup.roster[constants.pg] = pg1
+        self.assertEqual(self.lineup.salary,9000)
+
+        self.lineup.roster[constants.sg] = sg1
+        self.assertEqual(self.lineup.salary, 17000) 
+
+    def test_dfs_projection(self):
+        self.assertEqual(self.lineup.dfs_projection, 0)
+
+        self.lineup.roster[constants.pg] = pg1
+        self.assertEqual(self.lineup.dfs_projection, 42.8)
+        
+        self.lineup.roster[constants.sg] = sg1
+        self.assertEqual(self.lineup.dfs_projection, 76.5)
+
+    def test_key(self):
+        pass
   
  
 class Test_DFS_Site(unittest.TestCase):
