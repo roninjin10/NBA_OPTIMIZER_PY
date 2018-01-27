@@ -1,9 +1,13 @@
 import constants
-from player import Player
 from dfs_site import DFS_Site
-import unittest
 from lineup import Lineup
+from player import Player
+from pool import Pool
+
+import unittest
+
 import copy
+
 
 empty_lineup = Lineup()
 
@@ -36,6 +40,11 @@ c2 = Player(name='Pau Gasol', team='SA', opp='CLE', position='C', salary=5400, d
 
 test_players = [test_player, pg1, pg2, sg1, sg2, sf1, sf2, pf1, pf2, c1, c2]
 
+class Test_Pool(unittest.TestCase):
+    
+    def test_create_pool_from_csv(self):
+        pool = Pool()
+       
 class Test_Player(unittest.TestCase):
 
     def setUp(self):

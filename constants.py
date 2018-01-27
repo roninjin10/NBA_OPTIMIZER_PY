@@ -24,22 +24,44 @@ flex = 'FLEX'
 stat_categories = (pts, rbs, asts, stls, blks, tos, threes, dd, td)
 
 #DraftKings Constants
+dk_pool_order = [
+        'PG',
+        'PG/SG',
+        'SG',
+        'SG/SF',
+        'SF',
+        'SF/PF',
+        'PF',
+        'PF/C',
+        'C',
+        'PG/SF',
+        ]
 
+dk_pool_default_dic = {
+            'PG': [],
+            'PG/SG': [],
+            'PG/SF': [],
+            'SG': [],
+            'SG/SF': [],
+            'SF': [],
+            'SF/PF': [],
+            'PF': [],
+            'PF/C': [],
+            'C': [],
+            }
+ 
 dk_roster_order = [pg, sg, sf, pf, c, g, f, flex]
 
 dk_roster_priority = {
             'PG': [pg, g, flex],
             'PG/SG': [pg, sg, g, flex],
-            'PG/SF1': [pg],
+            'PG/SF': [pg,sf,g,f],
             'SG': [sg, g, flex],
             'SG/SF': [sg, g, sf, f, flex],
-            'PG/SF2': [g],
             'SF': [sf, f, flex],
             'SF/PF': [sf, pf, f, flex],
-            'PG/SF3': [sf],
             'PF': [pf, f, flex],
             'PF/C': [pf, f, c, flex],
-            'PG/SF4': [f, flex],
             'C': [c, flex],
             }
 
