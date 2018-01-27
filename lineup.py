@@ -1,6 +1,7 @@
 from dfs_site import DFS_Site
 import constants
 
+
 def is_shared_element(collection1, collection2):
     """returns true if any elements in 2 collections match.  Used enough where I should make this importable"""
     set1, set2 = set(collection1), set(collection2)
@@ -8,35 +9,38 @@ def is_shared_element(collection1, collection2):
 
 class Lineup:
     """lineup class only supports dk atm"""
+    """lineup class does not currently support PG/SF.  The plan as of now is to check only specific positions and then
+    reinsert the player back into the player pool to check other positions if not taken.  See
+    constants.dk_roster_priority for more information"""
 
     def __init__(self, site_name = constants.dk):
 
         self.dfs_site = DFS_Site()
-        self.roster = self.site.empty_roster
+        self.roster = self.dfs_site.empty_roster()
     
     def __repr__(self):
         projection = self.dfs_projection()
         salary = self.salary()
-        return self.roster.__repr__ + '/n' + f'Salary: {salary} DFS_Projection: {projection}'
+        return self.roster.__repr__() + '/n' + f'Salary: {salary} DFS_Projection: {projection}'
 
     def __len__(self):
-        return len(plr for plr in self.roster.items() if not plr is None)        
+        return len(pos for pos in self.roster.keys() if not self.roster[pos] is None)        
 
     def salary(self):
-        return sum(plr.salary for plr in self.roster.items() if not plr is None)
+        return sum(self.roster[pos].salary for pos in self.roster.keys() if not self.roster[pos] is None)
 
     def dfs_projection(self):
-        return sum(plr.dfs_projection for plr in self.roster.items() if not plr is None)
+        return round(sum(self.roster[pos].dfs_projection for pos in self.roster.keys() if not self.roster[pos] is None),2)
 
-    def key(self, current_position, current_player_num):
-        return ("Pos: " + current_position + " PlNum: " + current_player_num + " Sal: " + str(self.salary()) + " Positions: " 
-            + ''.join(pos + str(pos != None) for pos in constants.dk_roster_order))
+    def dic_key(self, current_position, current_player_num):
+        return ("Pos: " + str(current_position) + " PlNum: " + str(current_player_num) + " Sal: " + str(self.salary()) + " Positions: " 
+            + ''.join(pos + str(self.roster[pos] != None) for pos in constants.dk_roster_order))
 
 
-    def merge_lineup(self, lineup):
+    def merge_lineups(self, lineup):
         for pos in self.roster.keys():
-        	if self[pos] == None:
-        		self[pos] = lineup[pos]
+        	if self.roster[pos] == None:
+        		self.roster[pos] = lineup.roster[pos]
 
 
     def erase_lineup(self):
@@ -48,45 +52,14 @@ class Lineup:
         returns 1 if their is no roster spot for the player
         returns 2 if salary cap constraint would be valuable
         returns another non 0 number if another salary cap constraint is violated"""
-        if new_player.salary + self.salary() > self.site.salary_cap:
+        if new_player.salary + self.salary() > self.dfs_site.salary_cap:
             return 2
         #elif (player causes lineup to not satisfy the sites roster construction):
         #   return 3
         else:
             for roster_spot in constants.dk_roster_priority[new_player.position]:
-                if self.roster[roster_spot] == None and is_shared_element(new_player.dk_position(), dk_roster_construction[roster_spot]):
+                if self.roster[roster_spot] == None and is_shared_element(new_player.dk_positions(), constants.dk_roster_construction[roster_spot]):
                     self.roster[roster_spot] = new_player
                     return 0
         return 1
-
-
-
-
-    ####the below methods I am unsure if necessary###
-
-    def is_valid_salary(self):
-        return self.salary() <= self.site.sal_cap
-
-    #this likely should be moved to the Sites class since it's site specific
-    def is_valid_team(self):
-        team_opponent = []
-        for plr in self.roster.items():
-            if team_opponent == []:
-                team_opponent.append(plr.get_info('team'))
-                team_opponent.append(plr.get_info('opp'))
-            else:
-                if not plr.get_info('team') in team_opponent:
-                    return True
-        return False
-
-    #not sure if this is necessary
-    def is_valid_positional(self):
-        #returns boolean based on if the lineup has every position filled
-        for plr in self.roster.items():
-            if plr is None:
-                return False
-        return True
-
-    def is_valid(self):
-        return self.is_valid_positional() and self.is_valid_salary() and self.is_valid_team()
 

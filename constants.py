@@ -43,15 +43,15 @@ dk_roster_priority = {
             'C': [c, flex],
             }
 
-dk_roster_constr = { 
-            pg: ('PG'),
-            sg: ('SG'),
-            sf: ('SF'),
-            pf: ('PF'),
-            c: ('C'),
-            g: ('PG','SG'),
-            f: ('SF','PF'),
-            flex: ('PG','SG','SF','PF','C'),
+dk_roster_construction = { 
+            pg: ('PG',),
+            sg: ('SG',),
+            sf: ('SF',),
+            pf: ('PF',),
+            c: ('C',),
+            g: ('PG','SG',),
+            f: ('SF','PF',),
+            flex: ('PG','SG','SF','PF','C',),
             }
 
 

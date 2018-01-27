@@ -5,6 +5,8 @@ import unittest
 from lineup import Lineup
 import copy
 
+empty_lineup = Lineup()
+
 test_stat_projections = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
 
 test_player = Player(name='Kyle Anderson', team='SA', opp='CLE', position='PG/SF', salary=3000, dfs_site_id ='152333', stat_projections=test_stat_projections, site_name=constants.dk)
@@ -78,37 +80,40 @@ class Test_Player(unittest.TestCase):
 class Test_Lineup(unittest.TestCase):
 
     def setUp(self):
-        self.lineup = Lineup()
+        self.lineup = copy.deepcopy(empty_lineup)
         
     def test_salary(self):
-        self.assertEqual(self.lineup.salary, 0)
+        self.lineup = copy.deepcopy(empty_lineup) 
+        self.assertEqual(self.lineup.salary(), 0)
 
         self.lineup.roster[constants.pg] = pg1
-        self.assertEqual(self.lineup.salary,9000)
+        self.assertEqual(self.lineup.salary(),9000)
 
         self.lineup.roster[constants.sg] = sg1
-        self.assertEqual(self.lineup.salary, 17000) 
+        self.assertEqual(self.lineup.salary(), 17000) 
 
     def test_dfs_projection(self):
-        self.assertEqual(self.lineup.dfs_projection, 0)
+        self.lineup = copy.deepcopy(empty_lineup)
+        self.assertEqual(self.lineup.dfs_projection(), 0)
 
         self.lineup.roster[constants.pg] = pg1
-        self.assertEqual(self.lineup.dfs_projection, 42.8)
+        self.assertEqual(self.lineup.dfs_projection(), 42.8)
         
         self.lineup.roster[constants.sg] = sg1
-        self.assertEqual(self.lineup.dfs_projection, 76.5)
+        self.assertEqual(self.lineup.dfs_projection(), 76.5)
 
     def test_dic_key(self):
         """could use more tests but I'm confident this will work if the other methods work"""
+        self.lineup = copy.deepcopy(empty_lineup)
         self.lineup.roster[constants.pg] = pg1
-        key1 = self.lineup.dic_key()
+        key1 = self.lineup.dic_key(1,5)
         self.lineup.roster[constants.sg] = sg1
-        key2 = self.lineup.dic_key()
+        key2 = self.lineup.dic_key(1,5)
 
         self.assertEqual(key1 == key2, False)
   
     def test_merge_lineup(self):
-        lineup_to_merge = Lineup()
+        lineup_to_merge = copy.deepcopy(empty_lineup)
         self.lineup.roster[constants.pg] = pg1
         self.lineup.roster[constants.sg] = sg1
         self.lineup.roster[constants.sf] = sf1
@@ -164,7 +169,8 @@ class Test_Lineup(unittest.TestCase):
         self.assertEqual(self.lineup.roster[constants.flex] , c1)
 
     def test_add_player(self):
-        self.assertEqual(self.lineup.add_player(pg1),0)
+        self.lineup = copy.deepcopy(empty_lineup)
+        self.assertEqual(self.lineup.add_player(pg1),0) #this one?
         self.assertEqual(self.lineup.roster[constants.pg], pg1)
         
         self.assertEqual(self.lineup.add_player(pg2),0)
@@ -185,6 +191,11 @@ class Test_Lineup(unittest.TestCase):
         self.assertEqual(self.lineup.add_player(pf1),0)
         self.assertEqual(self.lineup.roster[constants.f], pf1)
 
+        #print(self.lineup.salary() + pf2.salary)
+        #the following 2 lines are just so it doesn't go over salary
+        self.lineup.roster[constants.pg] = test_player
+        self.lineup.roster[constants.f] 
+
         self.assertEqual(self.lineup.add_player(pf2), 1)
         self.assertEqual(pf2 in self.lineup.roster.items(), False)
 
@@ -197,12 +208,12 @@ class Test_Lineup(unittest.TestCase):
         expensive_sf = copy.deepcopy(sf1)
         expensive_sf.salary = 42000
 
-        test_salary_cap_lineup = Lineup()
-        self.assertEqual(self.lineup.add_player(expensive_SF), 0)
-        self.assertEqual(self.lineup.roster[constants.sf], expensive_SF)
+        test_salary_cap_lineup = copy.deepcopy(empty_lineup)
+        self.assertEqual(test_salary_cap_lineup.add_player(expensive_sf), 0)
+        self.assertEqual(test_salary_cap_lineup.roster[constants.sf], expensive_sf)
         
-        self.assertEqual(self.lineup.add_player(pg1), 2)
-        self.assertEqual(self.lineup.add_player(sg1), 0)
+        self.assertEqual(test_salary_cap_lineup.add_player(pg1), 2)
+        self.assertEqual(test_salary_cap_lineup.add_player(sg1), 0)
 
 
 class Test_DFS_Site(unittest.TestCase):
