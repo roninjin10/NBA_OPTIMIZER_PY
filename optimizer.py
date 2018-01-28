@@ -1,6 +1,6 @@
 import copy
 
-class Optimizer:
+class __Optimizer:
 
 	def __init__(self, site=dk, pool=None, lineups=[]):
 		self.site = Site(site)
@@ -11,7 +11,19 @@ class Optimizer:
 		if self.pool == None:
 			pool = Pool()
 
-	def __dynamic_optimizer(self, cur_lineup, cur_position, cur_player):
+        def __len__(self):
+            return len(lineups)
+
+        def __repr__(self):
+            return repr(lineups)
+
+        def __getitem__(self, key):
+            return lineups[key]
+
+
+class Dynamic_Optimizer(__Optimizer):
+
+	def __recursive_step(self, cur_lineup, cur_position, cur_player):
 		if cur_lineup.is_valid_lineup:
 			return cur_lineup
 
@@ -28,18 +40,11 @@ class Optimizer:
 			return lineup_if_pass if lineup_if_take == None else lineup_if_take
 		return lineup_if_pass if lineup_if_pass.salary > lineup_if_take.salary else lineup_if_take
 
-	def dynamic_optimizer(self, n):
+	def optimize(self, n):
 		self.memoized = {}
 		self.lineups.append( __dynamic_optimizer(empty_roster(self.site), 0, 0))
 
-	def genetic_optimizer(self, n):
-		pass
+class Genetic_Optimizer(__Optimizer):
 
-	def hybrid_optimizer(self, n):
-		pass
-
-	def rust_dynamic_optimizer(self, n):
-		pass
-
-	def rust_hybrid_optimizer(self, n):
-		pass
+	def optimize(self, n):
+            pass
