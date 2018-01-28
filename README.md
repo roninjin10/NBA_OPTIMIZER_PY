@@ -1,12 +1,6 @@
 TO DO:
 
-x1. build tests for lineup.py
-
-X2. finish lineup.py
-
-X3. build tests for pool.py
-
-X4. finish pool.py
+X1-4 finish and test all hte helper classes
 
 5. build and test basic optimizer.py
 
