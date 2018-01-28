@@ -8,7 +8,7 @@ class Pool:
     """only supports dk atm"""
 
     def __init__(self, csv_path):
-        self.df = pd.read_csv('./projections.csv')[['NAME','TEAM','OPP','POSITION','SALARY','SITE_ID','PTS','RBS','ASTS','STLS','BLKS','TOS','THREES','DOUBLE_DOUBLE','TRIPLE_DOUBLE']]
+        self.df = pd.read_csv(csv_path)[['NAME','TEAM','OPP','POSITION','SALARY','SITE_ID','PTS','RBS','ASTS','STLS','BLKS','TOS','THREES','DOUBLE_DOUBLE','TRIPLE_DOUBLE']]
         self.pool = constants.dk_pool_default_dic
         self.current_index = 0
         self.current_position = 0
@@ -32,7 +32,7 @@ class Pool:
             self.pool[new_player.position].append(new_player)
 
     def __repr__(self):
-        return self.df.__repr__()
+        return repr(self.df)
     
     def __len__(self):
         return sum(len(self.pool[position]) for position in self.pool.keys())

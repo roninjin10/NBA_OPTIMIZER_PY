@@ -68,9 +68,9 @@ class Test_Pool(unittest.TestCase):
 
     def test_get_item(self):
         pool = Pool('./small_projections.csv')
-        self.assertEqual(pool.get_item(5).name,'Avery Bradley')
-        self.assertEqual(pool.get_item(0).name,'John Wall')
-        self.assertEqual(pool.get_item(23).name,'Denzel Valentine')
+        self.assertEqual(pool[5].name,'Avery Bradley')
+        self.assertEqual(pool[0].name,'John Wall')
+        self.assertEqual(pool[23].name,'Denzel Valentine')
 
     def test_next_player_and_current_player(self):
         #these tests could be seperated by testing each using the player indexes instead of via using each other
