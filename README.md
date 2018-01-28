@@ -1,12 +1,12 @@
 TO DO:
 
-1. build tests for lineup.py
+x1. build tests for lineup.py
 
-2. finish lineup.py
+X2. finish lineup.py
 
-3. build tests for pool.py
+X3. build tests for pool.py
 
-4. finish pool.py
+X4. finish pool.py
 
 5. build and test basic optimizer.py
 

@@ -42,9 +42,114 @@ test_players = [test_player, pg1, pg2, sg1, sg2, sf1, sf2, pf1, pf2, c1, c2]
 
 class Test_Pool(unittest.TestCase):
     
-    def test_create_pool_from_csv(self):
-        pool = Pool()
-       
+    def test_init(self):
+        pool = Pool('./small_projections.csv')
+        
+        self.assertEqual(len(pool.pool['PG']),5)
+        self.assertEqual(len(pool.pool['PG/SG']),3)
+        self.assertEqual(len(pool.pool['SG']),1)
+        self.assertEqual(len(pool.pool['SG/SF']),4)
+        self.assertEqual(len(pool.pool['SF']),0)
+        self.assertEqual(len(pool.pool['SF/PF']),2)
+        self.assertEqual(len(pool.pool['PF']),0)
+        self.assertEqual(len(pool.pool['PF/C']),4)
+        self.assertEqual(len(pool.pool['C']),4)
+        self.assertEqual(len(pool.pool['PG/SF']),1)
+
+    def test_repr(self):
+        pool = Pool('./small_projections.csv')
+        
+        self.assertEqual(repr(pool),
+            pd.read_csv('./small_projections.csv')[['NAME','TEAM','OPP','POSITION','SALARY','SITE_ID','PTS','RBS','ASTS','STLS','BLKS','TOS','THREES','DOUBLE_DOUBLE','TRIPLE_DOUBLE']])
+    
+    def test_len(self):
+        pool = Pool('./small_projections.csv')
+        self.assertEqual(len(pool),24)
+
+    def test_get_item(self):
+        pool = Pool('./small_projections.csv')
+        self.assertEqual(pool.get_item(5).name,'Avery Bradley')
+        self.assertEqual(pool.get_item(0).name,'John Wall')
+        self.assertEqual(pool.get_item(23).name,'Denzel Valentine')
+
+    def test_next_player_and_current_player(self):
+        #these tests could be seperated by testing each using the player indexes instead of via using each other
+        pool = Pool('./small_projections.csv')
+        
+        self.assertEqual(pool.current_player().name, 'John Wall')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Tony Parker')
+
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Goran Dragic')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Ricky Rubio')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Dennis Schroder')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Avery Bradley')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Shabazz Napier')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Tyler Johnson')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Gary Harris')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'DeMar DeRozan')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Khris Middleton')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Marcus Smart')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Dion Waiters')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Michael Beasley')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'T.J. Warren')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Kelly Olynyk')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Al Horford')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Taj Gibson')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Bobby Portis')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Karl-Anthony Towns')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Nikola Jokic')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Brook Lopez')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Rudy Gobert')
+        
+        pool.next_player()
+        self.assertEqual(pool.current_player().name, 'Denzel Valentine')
+        
+        with self.assertRaises(IndexError):
+            pool.next_player()
+
 class Test_Player(unittest.TestCase):
 
     def setUp(self):
@@ -287,3 +392,4 @@ class Test_DFS_Site(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

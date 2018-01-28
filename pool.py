@@ -8,7 +8,7 @@ class Pool:
     """only supports dk atm"""
 
     def __init__(self, csv_path):
-        self.df = pd.read_csv('./projections.csv')[['NAME','TEAM','OPP','POSITION','SALARY','SITE_ID','PTS','RBS','ASTS','STLS','BLKS','TOS','THREES','DD','TD']]
+        self.df = pd.read_csv('./projections.csv')[['NAME','TEAM','OPP','POSITION','SALARY','SITE_ID','PTS','RBS','ASTS','STLS','BLKS','TOS','THREES','DOUBLE_DOUBLE','TRIPLE_DOUBLE']]
         self.pool = constants.dk_pool_default_dic
         self.current_index = 0
         self.current_position = 0
@@ -43,11 +43,11 @@ class Pool:
             raise IndexError
         for position in constants.dk_pool_order:
             if arg < len(self.pool[position]):
-                arg -= len(self.pool[position]
+                arg -= len(self.pool[position])
             else:
                 return self.pool[position][arg]
     
-    def get_current_player(self):
+    def current_player(self):
         try:
             return self.pool[constants.dk_pool_order[self.current_position]][self.positional_index]
         except:
