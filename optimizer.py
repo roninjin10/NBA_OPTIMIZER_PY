@@ -30,7 +30,7 @@ class __Optimizer:
     def __getitem__(self, key):
         return lineups[key]
 
-    def start_logging(self, level=logging.CRITICAL):
+    def start_logging(self, level=logging.DEBUG):
         logging.basicConfig(filename='logfile.log',level=level)
 
 
