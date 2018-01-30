@@ -3,15 +3,20 @@ from dfs_site import DFS_Site
 from lineup import Lineup
 from player import Player
 from pool import Pool
+from optimizer import Dynamic_Optimizer
 
 import unittest
 import pandas as pd
 
 import copy
 
+
 small_projections = Pool('./small_projections.csv')
 
 empty_lineup = Lineup()
+
+optimizer1 = Dynamic_Optimizer(pool='./small_projections.csv')
+optimizer2 = Dynamic_Optimizer(pool='./projections.csv')
 
 test_stat_projections = {constants.pts : 10, constants.rbs: 1, constants.asts: 1, constants.stls: 1, constants.blks: 1, constants.tos: 1, constants.threes: 1, constants.dd: 0, constants.td: 0}  
 
@@ -41,6 +46,11 @@ c1 = Player(name='Alex Len', team='PHO', opp='SAC', position='C', salary=4100, d
 c2 = Player(name='Pau Gasol', team='SA', opp='CLE', position='C', salary=5400, dfs_site_id ='152343', stat_projections=c2_stats, site_name=constants.dk)
 
 test_players = [test_player, pg1, pg2, sg1, sg2, sf1, sf2, pf1, pf2, c1, c2]
+
+class Test_Dynamic_Optimizer(unittest.TestCase):
+    
+    def test_optimize(self):
+        optimizer = copy.deepcopy(optimizer1)
 
 class Test_Pool(unittest.TestCase):
     
