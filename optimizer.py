@@ -7,9 +7,9 @@ from pool import Pool
 import logging
 
 def main():
-    opt = Dynamic_Optimizer('./small_projections.csv')
+    opt = Dynamic_Optimizer('./projections.csv')
     lu = opt.optimize()
-    print(opt)
+    print(lu)
 
 class __Optimizer:
 
@@ -30,7 +30,7 @@ class __Optimizer:
     def __getitem__(self, key):
         return lineups[key]
 
-    def start_logging(self, level=logging.DEBUG):
+    def start_logging(self, level=logging.WARNING):
         logging.basicConfig(filename='logfile.log',level=level)
 
 
@@ -45,7 +45,6 @@ class Dynamic_Optimizer(__Optimizer):
         logging.debug('{} pool.current_position == {}'.format(counter,repr(pool.current_position)))
         logging.debug('{} pool.positional_index == {}'.format(counter,repr(pool.positional_index)))
  
-        
         if len(lu) == len(self.dfs_site.roster_construction):
             logging.debug('{} Lineup complete returning lineup/n {}'.format(counter,repr(lu)))
             
@@ -78,7 +77,7 @@ class Dynamic_Optimizer(__Optimizer):
         if lu_take.add_player(take_player) == 0:
             logging.debug('{} lu_take.add_player was succesful'.format(counter))
 
-            lu_take = self.__recursive_step(pool,lu_take)
+            lu_take = self.__recursive_step(copy.deepcopy(pool),lu_take)
 
             logging.debug('{} lu_take finished and returned/n{}'.format(counter,repr(lu_take)))
         else:
@@ -88,7 +87,7 @@ class Dynamic_Optimizer(__Optimizer):
         logging.debug('{} starting lu_pass'.format(counter))
 
         lu_pass = copy.deepcopy(lu)
-        lu_pass = self.__recursive_step(pool,lu_pass)
+        lu_pass = self.__recursive_step(copy.deepcopy(pool),lu_pass)
 
         if lu_pass == None or lu_take == None:
             if lu_pass == None and lu_take == None:

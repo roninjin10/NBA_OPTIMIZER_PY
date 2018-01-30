@@ -21,7 +21,7 @@ class Lineup:
     def __repr__(self):
         projection = self.dfs_projection()
         salary = self.salary()
-        return self.roster.__repr__() + '/n' + f'Salary: {salary} DFS_Projection: {projection}'
+        return repr([self.roster[pos].name for pos in self.roster.keys() if not self.roster[pos] is None]) + '/n' + f'Salary: {salary} DFS_Projection: {projection}'
 
     def __len__(self):
         return len([pos for pos in self.roster.keys() if not self.roster[pos] is None])        
