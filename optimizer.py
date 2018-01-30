@@ -47,7 +47,6 @@ class Dynamic_Optimizer(__Optimizer):
  
         if len(lu) == len(self.dfs_site.roster_construction):
             logging.debug('{} Lineup complete returning lineup/n {}'.format(counter,repr(lu)))
-            
             return lu
 
         if pool.current_index == len(pool) - 1:
@@ -95,12 +94,22 @@ class Dynamic_Optimizer(__Optimizer):
             else:
                 logging.debug('{} {} failed returning the other'.format(counter,'lu_pass' if lu_pass == None else 'lu_take'))
 
+            if lu_pass == None:
+                self.memoized[lu_key] = lu_take
+                return lu_take
+            else:
+                self.memoized[lu_key] = lu_pass
+                return lu_pass
             return lu_take if lu_pass == None else lu_take
         else:
             logging.debug('{} comparing projections lu_take {} and lu_pass {}'.format(counter,str(lu_take.dfs_projection()),str(lu_pass.dfs_projection())))
-
-            return lu_take if lu_take.dfs_projection() >= lu_pass else lu_pass
-        
+            
+            if lu_take.dfs_projections() >= lu_pass.dfs_projections():
+                self.memoized[lu_key] = lu_take
+                return lu_take
+            else:
+                self.memoized[lu_key] = lu_pass
+                return lu_pass
 
 
     def optimize(self, n=1):
