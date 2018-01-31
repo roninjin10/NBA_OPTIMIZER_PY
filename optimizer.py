@@ -61,7 +61,9 @@ class Dynamic_Optimizer(__Optimizer):
         if lu_key in self.memoized.keys():
             logging.debug('{} lu_key in self.memoized.keys merging lu with memoized lu /n {} /n {}'.format(counter,repr(lu),repr(self.memoized[lu_key])))
             
-            return lu.merge_lineups(self.memoized[lu_key])
+            memoized_lu = self.memoized[lu_key]
+
+            return lu.merge_lineups(self.memoized[lu_key]) if memoized_lu != None else None
 
         lu_take = copy.deepcopy(lu)
         
@@ -104,7 +106,7 @@ class Dynamic_Optimizer(__Optimizer):
         else:
             logging.debug('{} comparing projections lu_take {} and lu_pass {}'.format(counter,str(lu_take.dfs_projection()),str(lu_pass.dfs_projection())))
             
-            if lu_take.dfs_projections() >= lu_pass.dfs_projections():
+            if lu_take.dfs_projection() >= lu_pass.dfs_projection():
                 self.memoized[lu_key] = lu_take
                 return lu_take
             else:
