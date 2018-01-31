@@ -1,4 +1,17 @@
-#this was never touched
+# The plan for this branch is to in fast time eliminate players from the player pool if they are guaranteed to not be in
+# the optimal lineup.  
+#
+# Idea 1: FInd all players with same or cheaper salary and a higher projection. (complexity n).
+#   Add those players to the lineup until there is no space for the player in question (more players makes it likely to
+#       end early so it shouldn't practically making it more complex.)
+#   Do it for every player (complexity n**2 total)
+#   We might be able to speed this up because if a player who has been eliminated AND same position is "better" then we know right away
+#   the player is eliminated.
+#   
+# Idea 2: Start with the highest projected player.  If every player cheaper than the player we have added can be added
+# to the lineup then the player is not in. After a player is eliminated eliminate any player at the same position
+# "worse" than that player.
+
 import pandas as pd
 
 from player import Player
@@ -27,8 +40,7 @@ class Pool:
             stat_projections[constants.dd] = row['DOUBLE_DOUBLE']
             stat_projections[constants.td] = row['TRIPLE_DOUBLE']
             
-            new_player = Player(name=row['NAME'],team=row['TEAM'],opp=row['OPPONENT'],position=row['POSITION'],salary=row['SALARY'],dfs_site_id=row['SITE_ID'],stat_projections=stat_projections,site_name=constants.dk)
-            #print(new_player)
+            new_player = Player(name=row['NAME'],team=row['TEAM'],opp=row['OPPONENT'],position=row['POSITION'],salary=row['SALARY'],dfs_site_id=row['SITE_ID'],stat_projections=stat_projections,site_name=constants.dk
 
             self.pool[new_player.position].append(new_player)
 
@@ -47,6 +59,9 @@ class Pool:
                 arg -= len(self.pool[position])
             else:
                 return self.pool[position][arg]
+
+    def parse_pool(self):
+        pass
     
     def current_player(self):
         try:
