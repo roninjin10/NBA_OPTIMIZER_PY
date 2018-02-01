@@ -17,6 +17,7 @@ class Lineup:
 
         self.dfs_site = DFS_Site()
         self.roster = self.dfs_site.empty_roster()
+        self.salary_cap = self.dfs_site.salary_cap
     
     def __repr__(self):
         projection = self.dfs_projection()
@@ -52,7 +53,7 @@ class Lineup:
         returns 1 if their is no roster spot for the player
         returns 2 if salary cap constraint would be valuable
         returns another non 0 number if another salary cap constraint is violated"""
-        if new_player.salary + self.salary() > self.dfs_site.salary_cap:
+        if salary_cap != None and new_player.salary + self.salary() > self.salary_cap:
             return 2
         #elif (player causes lineup to not satisfy the sites roster construction):
         #   return 3
